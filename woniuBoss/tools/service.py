@@ -26,11 +26,15 @@ class Service:
         finally:
             return result
 
+    # 获取下拉菜单选项
     @classmethod
-    def select_values(cls, driver, how, what):
+    def get_select_values(cls, driver, how, what):
         ele = driver.find_element(how, what)
-        result = ele.text
-        all_options = select.find_elements_by_tag_name("option")
+        all_options = ele.find_elements_by_tag_name("option")
+        all_options_li = []
+        for option in all_options:
+            all_options_li.append(option.text)
+        print(all_options_li)
 
     @classmethod
     def element_text(cls, driver, how, what):

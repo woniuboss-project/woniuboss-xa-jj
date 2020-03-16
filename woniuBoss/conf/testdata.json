@@ -7,43 +7,8 @@
       "test_data_col": 3,
       "except_col": 4,
       "id_col": 0
-      },
-    "add_meeting":{
-      "data_path": "../data/woniuBoss_test_cases.xlsx",
-      "sheetname": "meeting",
-      "start_row": 1,
-      "end_row": 6,
-      "test_data_col": 3,
-      "except_col": 4,
-      "id_col": 0
-      },
-    "edit_meeting":{
-      "data_path": "../data/woniuBoss_test_cases.xlsx",
-      "sheetname": "meeting",
-      "start_row": 7,
-      "end_row": 12,
-      "test_data_col": 3,
-      "except_col": 4,
-      "id_col": 0
-      },
-    "delete_meeting":{
-      "data_path": "../data/woniuBoss_test_cases.xlsx",
-      "sheetname": "meeting",
-      "start_row": 131,
-      "end_row": 13,
-      "test_data_col": 3,
-      "except_col": 4,
-      "id_col": 0
-      },
-    "query_meeting":{
-      "data_path": "../data/woniuBoss_test_cases.xlsx",
-      "sheetname": "meeting",
-      "start_row": 14,
-      "end_row": 14,
-      "test_data_col": 3,
-      "except_col": 4,
-      "id_col": 0
       }
+
 }
 
 

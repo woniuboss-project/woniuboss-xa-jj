@@ -1,5 +1,3 @@
 {
-  "login":"woniuBoss.bin.test_login.LoginTest",
-  "meeting":"woniuBoss.bin.test_meeting.MeetingTest"
-
+  "login":"woniuBoss.bin.test_login.LoginTest"
 }
