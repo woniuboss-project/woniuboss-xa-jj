@@ -52,7 +52,7 @@ class Service:
     def select_random(cls, selector):
         import random
         Select(selector).select_by_index(random.randint(0, len(Select(selector).options) - 1))
-
+    # 依照显示的选项名进行选择
     @classmethod
     def select_by_name(cls, selector, name):
         Select(selector).select_by_visible_text(name)
