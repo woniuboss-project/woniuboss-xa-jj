@@ -7,10 +7,10 @@ from woniuBoss.tools.utility import Utility
 import unittest
 from parameterized import parameterized
 
-# 获取登陆用的测试信息
+# 获取登陆用的测试数据的配置
 test_conf = Utility.get_json('../conf/testdata.json')
+# 通过配置获取登陆数据
 login_info = Utility.get_excel_tup_list(test_conf["login"])
-print(login_info)
 
 
 # # 1.获取测试数据 2。 对每条数据执行
