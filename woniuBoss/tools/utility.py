@@ -27,6 +27,8 @@ class Utility:
         else:
             return False
 
+    # 根据conf里面定义的测试数据列，返回一个包含测试数据key和value的字典的列表
+    # 具体格式请运行本脚本进行查看
     @classmethod
     def get_excel(cls, conf_data):
         import xlrd
@@ -63,6 +65,7 @@ class Utility:
             test_info.append(d)
         return test_info
 
+    # 根据conf里面定义的测试数据列，返回一个只包含测试数据value的列表
     @classmethod
     def get_excel_tup_list(cls, conf_data):
         test_info = cls.get_excel(conf_data)
@@ -114,4 +117,13 @@ class VerifyInSQL:
 
 
 if __name__ == '__main__':
-    Utility().get_excel('../data/agileone_test_cases.xlsx', 'customermanager', 1, 9, 2, 4)
+    confdata={
+        "data_path": "../data/woniuBoss_test_cases.xlsx",
+        "sheetname": "login",
+        "start_row": 1,
+        "end_row": 5,
+        "test_data_col": 3,
+        "except_col": 4,
+        "id_col": 0
+    }
+    print(Utility().get_excel(confdata))
