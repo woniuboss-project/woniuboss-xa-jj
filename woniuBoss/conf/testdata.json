@@ -7,8 +7,18 @@
       "test_data_col": 3,
       "except_col": 4,
       "id_col": 0
-      }
-
+      },
+    "login_api":{
+      "data_path": "../data/woniuBoss_test_cases.xlsx",
+      "sheetname": "login",
+      "start_row": 1,
+      "end_row": 5,
+      "test_data_col": 3,
+      "except_col": 7,
+      "id_col": 0,
+      "url_col": 5,
+      "method_col":6
+    }
 }
 
 

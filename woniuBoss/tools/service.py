@@ -2,7 +2,7 @@ from selenium import webdriver
 from selenium.webdriver.support.select import Select
 
 from woniuBoss.tools.utility import Utility
-
+import  requests
 
 class Service:
     @classmethod
@@ -117,6 +117,21 @@ class Service:
         png_path = '../bugPng/error_%s.png' % ctime
         # 截图
         cls.get_png(driver, png_path)
+
+    # 打开页面
+    @classmethod
+    def get_session(cls, conf_path):
+        data = Utility.get_json(conf_path)
+        aurl = Utility.get_json(conf_path)["aurl"]
+        host = Utility.get_json(conf_path)["host"]
+        port = Utility.get_json(conf_path)["port"]
+        # 构造url打开网页
+        login_url = f"http://{host}:{port}/{aurl}"
+        login_data ={'username': data['username'], "password": data['password'], 'verifycode': data['verifycode']}
+        session = requests.session()
+        session.post(login_url, login_data)
+        return session
+
 
 
 if __name__ == '__main__':
