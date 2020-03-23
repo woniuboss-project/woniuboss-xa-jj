@@ -75,6 +75,16 @@ class Utility:
             li.append(tup)
         return li
 
+    # 根据conf里面定义的测试数据列，将数据包装成字典套元祖的列表[(dic,),(dic2,)] 方便读取
+    @classmethod
+    def get_excel_dict_tup_list(cls, conf_data):
+        test_info = cls.get_excel(conf_data)
+        li = []
+        for i in range(len(test_info)):
+            test_info[i] = (test_info[i],)
+
+        return test_info
+
     @classmethod
     def create_path_by_time(cls):
         import time
@@ -117,7 +127,7 @@ class VerifyInSQL:
 
 
 if __name__ == '__main__':
-    confdata={
+    confdata = {
         "data_path": "../data/woniuBoss_test_cases.xlsx",
         "sheetname": "login",
         "start_row": 1,
@@ -127,3 +137,4 @@ if __name__ == '__main__':
         "id_col": 0
     }
     print(Utility().get_excel(confdata))
+    print(Utility().get_excel_dict_tup_list(confdata))
