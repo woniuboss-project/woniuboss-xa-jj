@@ -2,10 +2,11 @@
   "browser":"Chrome",
   "host":"192.168.114.220",
   "port":"8080",
-  "aurl":"WoniuBoss2.5",
+  "aurl":"WoniuBoss2.5/log/userLogin",
   "dbuser": "root",
   "dbpassword": "sky123",
   "dbname": "woniuboss2.5",
-  "username": "wncd000",
-  "password": "woniu123"
+  "userName": "wncd000",
+  "userPass": "woniu123",
+  "checkcode": "0000"
 }
