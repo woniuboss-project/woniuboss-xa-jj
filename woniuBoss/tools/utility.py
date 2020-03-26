@@ -39,6 +39,15 @@ class Utility:
         test_data_col = conf_data["test_data_col"]
         expect_col = conf_data["except_col"]
         id_col = conf_data["id_col"]
+        url_col = None
+        if 'url_col' in conf_data.keys():
+            url_col = conf_data['url_col']
+        method_col = None
+        if 'method_col' in conf_data.keys():
+            method_col = conf_data['method_col']
+        upload_file_col = None
+        if 'upload_file_col' in conf_data.keys():
+            upload_file_col = conf_data['upload_file_col']
         workbook = xlrd.open_workbook(path)
         # print(workbook)
         contents = workbook.sheet_by_name(sheetname)
@@ -54,15 +63,34 @@ class Utility:
             expect = contents.cell(i, expect_col).value
             # h获取测试用例编号
             data_id = contents.cell(i, id_col).value
-            # 单一单元格内容按换行切割
-            tmp = data.split('\n')
             d = {}
-            for t in tmp:
-                t_tmp = t.split("=")
-                d[t_tmp[0]] = t_tmp[1]
-            d["expect"] = expect
-            d["id"] = data_id
-            test_info.append(d)
+            if url_col is None:
+                # 单一单元格内容按换行切割
+                tmp = data.split('\n')
+
+                for t in tmp:
+                    t_tmp = t.split("=")
+                    d[t_tmp[0]] = t_tmp[1]
+                d["expect"] = expect
+                d["id"] = data_id
+                test_info.append(d)
+            if url_col is not None:
+                test_info.append(d)
+                d["url"] = contents.cell(i, url_col).value
+                data = contents.cell(i, test_data_col).value
+                tmp = data.split('\n')
+                d1 = {}
+                for t in tmp:
+                    if '=' in t:
+                        t_tmp = t.split("=")
+                        d1[t_tmp[0]] = t_tmp[1]
+                d['data'] = d1
+            if method_col is not None:
+                d["method"] = contents.cell(i, method_col).value
+            if upload_file_col is not None:
+                upload_file = contents.cell(i, upload_file_col).value
+                filename = upload_file.split('/')[-1]
+                d['upload_file'] = {'filename': (f'{filename}', open(f'{upload_file}'), 'r')}
         return test_info
 
     # 根据conf里面定义的测试数据列，返回一个只包含测试数据value的列表
@@ -74,6 +102,16 @@ class Utility:
             tup = tuple(test.values())
             li.append(tup)
         return li
+
+    # 根据conf里面定义的测试数据列，将数据包装成字典套元祖的列表[(dic,),(dic2,)] 方便读取
+    @classmethod
+    def get_excel_dict_tup_list(cls, conf_data):
+        test_info = cls.get_excel(conf_data)
+        li = []
+        for i in range(len(test_info)):
+            test_info[i] = (test_info[i],)
+
+        return test_info
 
     @classmethod
     def create_path_by_time(cls):
@@ -117,13 +155,25 @@ class VerifyInSQL:
 
 
 if __name__ == '__main__':
-    confdata={
+    confdata = {
         "data_path": "../data/woniuBoss_test_cases.xlsx",
         "sheetname": "login",
         "start_row": 1,
         "end_row": 5,
         "test_data_col": 3,
         "except_col": 4,
-        "id_col": 0
+        "id_col": 0,
+    }
+    confdata2 = {
+        "data_path": "../data/woniuBoss_test_cases.xlsx",
+        "sheetname": "login",
+        "start_row": 1,
+        "end_row": 5,
+        "test_data_col": 3,
+        "except_col": 4,
+        "id_col": 0,
+        "url_col": 5,
+        "method_col": 6
     }
     print(Utility().get_excel(confdata))
+    print(Utility().get_excel_dict_tup_list(confdata2))

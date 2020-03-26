@@ -52,6 +52,7 @@ class Service:
     def select_random(cls, selector):
         import random
         Select(selector).select_by_index(random.randint(0, len(Select(selector).options) - 1))
+
     # 依照显示的选项名进行选择
     @classmethod
     def select_by_name(cls, selector, name):
@@ -117,6 +118,32 @@ class Service:
         png_path = '../bugPng/error_%s.png' % ctime
         # 截图
         cls.get_png(driver, png_path)
+
+    # 打开页面
+    @classmethod
+    def get_session(cls, conf_path):
+        import requests
+        data = Utility.get_json(conf_path)
+        aurl = Utility.get_json(conf_path)["aurl"]
+        host = Utility.get_json(conf_path)["host"]
+        port = Utility.get_json(conf_path)["port"]
+        # 构造url打开网页
+        login_url = f"http://{host}:{port}/{aurl}"
+        login_data = {'userName': data['userName'], "userPass": data['userPass'], 'checkcode': data['checkcode']}
+        session = requests.session()
+        session.post(login_url, login_data)
+        return session
+
+    @classmethod
+    def get_resp(cls, session, data_dict):
+        # session = cls.get_session(conf_path)
+        if data_dict["method"] == "GET":
+            resp = session.get(data_dict["url"])
+        elif "upload_file" in data_dict.keys():
+            resp = session.post(data_dict["url"], data_dict["data"], file=data_dict["upload_file"])
+        else:
+            resp = session.post(data_dict["url"], data_dict["data"])
+        return resp
 
 
 if __name__ == '__main__':

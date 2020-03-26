@@ -15,6 +15,15 @@ class Login:
         driver.find_element_by_css_selector('button.btn-save').click()
 
     def do_login(self, driver, data_dic):
-        self.input_uname(driver, data_dic["username"])
-        self.input_upass(driver, data_dic["password"])
+        self.input_uname(driver, data_dic["userName"])
+        self.input_upass(driver, data_dic["userPass"])
         self.click_button(driver)
+
+
+class LoginApi:
+    def __init__(self):
+        import requests
+        self.session = requests.session()
+
+    def do_login(self, login_data):
+        return self.session.post(login_data['url'], login_data['data'])
