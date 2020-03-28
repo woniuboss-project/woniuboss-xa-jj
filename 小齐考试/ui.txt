@@ -1,0 +1,64 @@
+*** Settings ***
+Library           SeleniumLibrary
+
+*** Test Cases ***
+login
+    Open Browser    https://snailpet.com/index
+    Input Text    css:input.cla-tex:nth-child(1)    13772135029
+    Input Password    css:input.cla-tex:nth-child(2)    123456
+    Click Button    css:.ori-btn
+    Wait Until Element Is Visible    id:shop_name
+    Element Should Contain    id:shop_name    test
+    Close Browser
+
+cash
+    Open Browser    https://snailpet.com/index
+    Click Button    css:a.menu_item:nth-child(2) > div:nth-child(3)
+    Input Text    css:.search-input > input:nth-child(1)    maoliang
+    Click Button    css:.search-icon
+    Wait Until Element Is Visible    css:div.text-c:nth-child(1)
+    Element Should Contain    css:div.text-c:nth-child(1)    null
+
+shop-code
+    Open Browser    https://snailpet.com/index
+    Click Button    css:a.menu_item:nth-child(17) > div:nth-child(2)
+    Click Button    css:.tl-red
+    Input Text    css:.ng-touched    shop-code
+    Sleep    1
+    Input Text    css:.ng-dirty    200
+    Sleep    1
+    Click Element    xpath:/html/body/app-root/div/snail-message-main/div/snail-sale/div[2]/div/div/div[2]/div[3]
+    Click Element    xpath:/html/body/app-root/div/snail-message-main/div/snail-sale/div[2]/div/div/div[2]/div[3]/div/div/ul/li[1]
+    Sleep    1
+    Click Button    css:div.pop_window:nth-child(1) > div:nth-child(3) > div:nth-child(2)
+    Wait Until Element Is Visible    css:div.unit:nth-child(1) > div:nth-child(1) > span:nth-child(1)
+    Element Should Contain    css:div.unit:nth-child(1) > div:nth-child(1) > span:nth-child(1)    shop-code
+    Close Browser
+
+customer-code
+    Open Browser    https://snailpet.com/index
+    Click Button    css:a.menu_item:nth-child(14) > div:nth-child(2)
+    Click Button    css:.last-li
+    Input Text    css:input.add-input:nth-child(1)    shop
+    sleep    2
+    Click Element    xpath:/html/body/app-root/div/ng-component/snail-set-member/div/div/div[2]/div/div/div[2]/div[1]/div
+    Click Element    xpath:/html/body/app-root/div/ng-component/snail-set-member/div/div/div[2]/div/div/div[2]/div[1]/div/div/div/ul/li[4]
+    sleep    1
+    Input Text    css:input.add-input:nth-child(3)    500
+    Click Element    xpath:/html/body/app-root/div/ng-component/snail-set-member/div/div/div[2]/div/div/div[2]/div[2]/div
+    Click Element    xpath:/html/body/app-root/div/ng-component/snail-set-member/div/div/div[2]/div/div/div[2]/div[2]/div/div/div/ul/li[1]
+    sleep    1
+    Click Button    css:div.pop_window:nth-child(1) > div:nth-child(3) > div:nth-child(2)
+    Wait Until Element Is Visible    css:.gold > p:nth-child(1)
+    Element Should Contain    css:.gold > p:nth-child(1)    \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ add-customer
+    Close Browser
+
+report
+    Open Browser    https://snailpet.com/index
+    Click Button    css:a.menu_item:nth-child(12) > div:nth-child(2)
+    Click Button    xapth:/html/body/app-root/div/snail-message-main/div/snail-sale/div[1]/a[10]
+    Click Button    css:div.ms-unit:nth-child(2) > div:nth-child(3) > button:nth-child(5)
+    sleep    1
+    Click Button    css:a.screen-btn:nth-child(15)
+    Click Button    xprath:/html/body/app-root/div/snail-message-main/div/snail-sale/div[2]/div[1]/div[3]/button[3]
+    Close Browser

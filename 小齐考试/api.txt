@@ -1,0 +1,41 @@
+*** Settings ***
+Library           RequestsLibrary
+
+*** Variables ***
+&{header}         Content-type=application/json
+&{head}           content-type=application/x-www-form-urlencoded
+
+*** Test Cases ***
+loginpage
+    ${data}    Create Dictionary    phone=13772135029    password=123456    shop_id=null
+    Create Session    session    https://snailpet.com
+    ${resp}    Post Request    session    /v2/Passport/login    ${data}    headers=${header}
+    Log    ${resp.text}
+    Run Keyword If    ${resp.status_code}==200    log    login pass
+    ...    ELSE    log    login fail
+
+payment
+    ${data}    Create Dictionary    actionTime=1584374400    type=1    mark=shopping    amount=339    shopId=17533
+    ...    shop_id=17533
+    Create Session    session    https://snailpet.com
+    ${resp}    Post Request    session    /v2/Shop/addSpending    ${data}    headers=${head}
+    log    ${resp.text}
+    Run Keyword If    ${resp.status_code}==200    log    add-paymant-pass
+    ...    ELSE    log    add-payment-fail
+
+addcustomer
+    ${data}    Create Dictionary    background=1    discount=10    discount_for_combination=10    discountForService=10    enablePlus=1
+    ...    minPrice=5000    name=zhangxiaokai    shop_id=17533    shopId=17533
+    Create Session    session    https://snailpet.com
+    ${resp}    Post Request    session    /v2/Shop/setMemberLevel    ${data}    headers=${head}
+    log    ${resp.text}
+    Run Keyword If    ${resp.status_code}==200    log    addcustomer pass
+    ...    ELSE    log    addcustomer fail
+
+shopping-code
+    ${data}    Create Dictionary    exp_time_type=0    integral_percentage=400    name=weekshoppingcode    shop_id=17533    shopId=17533
+    Create Session    session    https://snailpet.com
+    ${resp}    Post Request    session    /v2/shopping_card/save    ${data}    headers=${head}
+    log    ${resp.text}
+    Run Keyword If    ${resp.status_code}==200    log    save-shoppingcode pass
+    ...    ELSE    log    save=shoppingcode fail
