@@ -1,0 +1,43 @@
+*** Settings ***
+Library           Selenium2Library
+Library           RequestsLibrary
+
+*** Keywords ***
+登录接口测试
+    [Arguments]    ${phone}    ${password}
+    Create Session    session    https://snailpet.com
+    ${login_data}    Create Dictionary    phone=${phone}    password=${password}    shop_id=17556
+    ${headers}    Create Dictionary    Content-Type=application/json
+    ${resp}    Post Request    session    /v2/Passport/login    ${login_data}    headers=${headers}
+    #Log    ${resp.text}
+    Run Keyword If    ${resp.status_code}==200    log    test ok
+    ...    ELSE    log    test fail
+
+导航栏切换接口测试
+    [Arguments]    ${ex_next_page}    ${ex_title}
+    Create Session    session    https://snailpet.com
+    ${chage_page_data}    Create Dictionary    ex_current_page="首页"    ex_kind = "点击"    ex_next_page = ${ex_next_page}    ex_title=${ex_title}    shop_id = 17556
+    ${headers}    Create Dictionary    Content-Type=application/json
+    ${resp}    Post Request    session    /v2/analysis_es/action    ${chage_page_data}    headers=${headers}
+    Run Keyword If    ${resp.status_code}==200    log    change ok
+    ...    ELSE    log    change fail
+
+删除商品
+    [Arguments]    ${product_id}
+    Create Session    session    https://snailpet.com
+    ${del_pro_data}    Create Dictionary    shopId=17556    product_ids=${product_id}    shop_id = 17556
+    ${headers}    Create Dictionary    Content-Type=application/json
+    ${resp}    Post Request    session    /v2/Product/delByIds    ${del_pro_data}    headers=${headers}
+    Run Keyword If    ${resp.status_code}==200    log    del ok
+    ...    ELSE    log    del fail
+
+添加会员卡
+    [Arguments]    ${background}    ${discount}    ${combination}    ${Service}    ${enablePlus}    ${minPrice}
+    ...    ${name}    ${shopId}
+    Create Session    session    https://snailpet.com
+    ${VIP_data}    Create Dictionary    background=${background}    discount=${discount}    discount_for_combination=${combination}    discountForService=${service}    enablePlus=${enablePlus}
+    ...    minPrice=${minPrice}    name=${name}    shop_id=${shopId}    shopId=${shopId}
+    ${headers}    Create Dictionary    Content-Type=application/json
+    ${resp}    Post Request    session    v2/Shop/setMemberLevel    ${VIP_data}    headers=${headers}
+    Run Keyword If    ${resp.status_code}==200    log    del ok
+    ...    ELSE    log    del fail

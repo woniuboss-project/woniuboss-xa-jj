@@ -1,0 +1,90 @@
+*** Settings ***
+Library           Selenium2Library
+Library           RequestsLibrary
+
+*** Keywords ***
+登录成功
+    [Arguments]    ${phone}    ${password}
+    Open Browser    https://snailpet.com/index
+    Maximize Browser Window
+    Click Element    xpath:/html/body/div[3]/div/div/div[3]/div[2]
+    Wait Until Element Is Visible    xpath:/html/body/app-root/div/snail-index/div/div/div/div[3]/div/div[1]/a
+    Input Text    xpath:/html/body/app-root/div/snail-index/div/div/div/div[3]/div/div[1]/input[1]    ${phone}
+    Input Password    xpath:/html/body/app-root/div/snail-index/div/div/div/div[3]/div/div[1]/input[2]    ${password}
+    Click Element    xpath:/html/body/app-root/div/snail-index/div/div/div/div[3]/div/div[1]/a
+    Wait Until Element Is Visible    xpath:/html/body/app-root/snail-header/div/div/span/a
+    Element Should Contain    xpath:/html/body/app-root/snail-header/div/div/span/a    安全退出
+    Close Browser
+
+登录失败
+    [Arguments]    ${phone}    ${password}
+    Open Browser    https://snailpet.com/index
+    Maximize Browser Window
+    Click Element    xpath:/html/body/div[3]/div/div/div[3]/div[2]
+    Wait Until Element Is Visible    xpath:/html/body/app-root/div/snail-index/div/div/div/div[3]/div/div[1]/a
+    Input Text    xpath:/html/body/app-root/div/snail-index/div/div/div/div[3]/div/div[1]/input[1]    ${phone}
+    Input Password    xpath:/html/body/app-root/div/snail-index/div/div/div/div[3]/div/div[1]/input[2]    ${password}
+    Click Element    xpath:/html/body/app-root/div/snail-index/div/div/div/div[3]/div/div[1]/a
+    Sleep    3
+    Element Should not Contain    xpath:/html/body/app-root/snail-header/div/div/span/a    安全退出
+    Close Browser
+
+新增会员
+    [Arguments]    ${cus_name}    ${cus_phone}    ${pet_name}
+    Open Browser    https://snailpet.com/index
+    Maximize Browser Window
+    Click Element    xpath:/html/body/div[3]/div/div/div[3]/div[2]
+    Wait Until Element Is Visible    xpath:/html/body/app-root/div/snail-index/div/div/div/div[3]/div/div[1]/a
+    Input Text    xpath:/html/body/app-root/div/snail-index/div/div/div/div[3]/div/div[1]/input[1]    17765838175
+    Input Password    xpath:/html/body/app-root/div/snail-index/div/div/div/div[3]/div/div[1]/input[2]    jiangjun123..
+    Click Element    xpath:/html/body/app-root/div/snail-index/div/div/div/div[3]/div/div[1]/a
+    Wait Until Element Is Visible    xpath:/html/body/app-root/div/snail-menu-nav/div/a[2]/div[1]
+    Click Element    xpath:/html/body/app-root/div/snail-menu-nav/div/a[2]/div[1]
+    sleep    3
+    Click Element    xpath:/html/body/app-root/div/snail-member-main/snail-members/div[1]/div/div[1]/div[7]/a[1]
+    sleep    3
+    Input Text    xpath:/html/body/app-root/div/snail-member-main/snail-members/div[2]/div/div/div[2]/div/div[1]/div[1]/div[1]/div/div/input    ${cus_name}
+    Input Text    xpath:/html/body/app-root/div/snail-member-main/snail-members/div[2]/div/div/div[2]/div/div[1]/div[1]/div[2]/div/div/input    ${cus_phone}
+    Execute Javascript    window.scrollTo(0,50)
+    Input Text    xpath；/html/body/app-root/div/snail-member-main/snail-members/div[2]/div/div/div[2]/div/div[2]/ul/li/div[1]/div[1]/div/div/input    ${pet_name}
+    Click Element    xpath:/html/body/app-root/div/snail-member-main/snail-members/div[2]/div/div/div[3]/div[2]
+    sleep    3
+    Element Should Contain    xpath:/html/body/app-root/div/snail-member-main/snail-members/div[1]/div/div[2]/table/tbody/tr[1]/td[2]/a/span    ${cus_name}
+
+商品出库
+    [Arguments]    ${num}
+    Open Browser    https://snailpet.com/index
+    Maximize Browser Window
+    Click Element    xpath:/html/body/div[3]/div/div/div[3]/div[2]
+    Wait Until Element Is Visible    xpath:/html/body/app-root/div/snail-index/div/div/div/div[3]/div/div[1]/a
+    Input Text    xpath:/html/body/app-root/div/snail-index/div/div/div/div[3]/div/div[1]/input[1]    17765838175
+    Input Password    xpath:/html/body/app-root/div/snail-index/div/div/div/div[3]/div/div[1]/input[2]    jiangjun123..
+    Click Element    xpath:/html/body/app-root/div/snail-index/div/div/div/div[3]/div/div[1]/a
+    sleep    3
+    Click Element    xpath:/html/body/app-root/div/snail-menu-nav/div/a[3]/div[1]
+    sleep    3
+    Click Element    xpath:/html/body/app-root/div/ng-component/div/div/snail-product-stock/div[3]/table/tbody/tr/td[8]/a[2]
+    Input Text    xpath:/html/body/app-root/div/ng-component/div/div/snail-product-stock/div[8]/div/div/div[2]/div/div[1]/div/div/input    ${num}
+    Click Element    xpath:/html/body/app-root/div/ng-component/div/div/snail-product-stock/div[8]/div/div/div[3]/div[2]
+
+修改支出
+    [Arguments]    ${num}    ${money}    ${time}
+    Open Browser    https://snailpet.com/index
+    Maximize Browser Window
+    Click Element    xpath:/html/body/div[3]/div/div/div[3]/div[2]
+    Wait Until Element Is Visible    xpath:/html/body/app-root/div/snail-index/div/div/div/div[3]/div/div[1]/a
+    Input Text    xpath:/html/body/app-root/div/snail-index/div/div/div/div[3]/div/div[1]/input[1]    17765838175
+    Input Password    xpath:/html/body/app-root/div/snail-index/div/div/div/div[3]/div/div[1]/input[2]    jiangjun123..
+    Click Element    xpath:/html/body/app-root/div/snail-index/div/div/div/div[3]/div/div[1]/a
+    sleep    3
+    Click Element    xpath:/html/body/app-root/div/snail-menu-nav/div/a[6]/div[1]    #支出菜单
+    sleep    3
+    Click Element    xpath:/html/body/app-root/div/snail-else-main/snail-expend/div[1]/div[2]/table/tbody/tr[2]/td[4]/a[1]
+    sleep    3
+    Click Element    css:.remember-type-ul > li:nth-child(${num})
+    Clear Element Text    xpath:/html/body/app-root/div/snail-else-main/snail-expend/div[2]/div/div/div[2]/div/div[3]/div[1]/div/div/input
+    Input Text    xpath:/html/body/app-root/div/snail-else-main/snail-expend/div[2]/div/div/div[2]/div/div[3]/div[1]/div/div/input    ${money}
+    Input Text    id:id-exp-date    ${time}
+    sleep    3
+    Click Element    css:div.pop_window:nth-child(1) > div:nth-child(3) > div:nth-child(2)
+    Element Should Contain    css:td.ori-text    ${money}
