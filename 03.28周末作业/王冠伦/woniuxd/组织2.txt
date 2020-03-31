@@ -1,0 +1,19 @@
+*** Settings ***
+Resource          common.txt
+Resource          login_page.txt
+
+*** Keywords ***
+进行注销测试
+    [Arguments]    ${url}    ${username}    ${password}
+    打开浏览器    ${url}
+    最大化窗口
+    点击公告弹窗确定
+    Wait Until Element Is Visible    xpath:/html/body/app-root/div/snail-index/div/div/div/div[3]/div/div[1]/a
+    输入用户名    ${username}
+    输入密码    ${password}
+    点击登录
+    Wait Until Element Is Visible    xpath:/html/body/app-root/snail-header/div/div/span/a
+    Click Element    xpath:/html/body/app-root/snail-header/div/div/span/a
+    Click Element    xpath:/html/body/div[5]/div[3]/a[1]
+    Wait Until Element Is Visible    xpath:/html/body/app-root/div/snail-index/div/div/div/div[3]/div/div[1]/a
+    Element Should Contain    xpath:/html/body/div[3]/div/div/div[1]    更新公告

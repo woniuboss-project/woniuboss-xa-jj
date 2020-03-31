@@ -1,0 +1,27 @@
+*** Settings ***
+Resource          common.txt
+Resource          login_page.txt
+
+*** Keywords ***
+进行登录测试
+    [Arguments]    ${url}    ${username}    ${password}
+    打开浏览器    ${url}
+    最大化窗口
+    点击公告弹窗确定
+    Wait Until Element Is Visible    xpath:/html/body/app-root/div/snail-index/div/div/div/div[3]/div/div[1]/a
+    输入用户名    ${username}
+    输入密码    ${password}
+    点击登录
+    Wait Until Element Is Visible    xpath:/html/body/app-root/snail-header/div/div/span/a
+    Element Should Contain    id:shop_name    老八小店
+    关闭浏览器
+
+直接登录
+    打开浏览器    https://snailpet.com
+    最大化窗口
+    点击公告弹窗确定
+    Wait Until Element Is Visible    xpath:/html/body/app-root/div/snail-index/div/div/div/div[3]/div/div[1]/a
+    输入用户名    13119150855
+    输入密码    w19971130
+    点击登录
+    Wait Until Element Is Visible    xpath:/html/body/app-root/snail-header/div/div/span/a
