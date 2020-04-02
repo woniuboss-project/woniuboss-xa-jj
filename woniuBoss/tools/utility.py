@@ -84,6 +84,8 @@ class Utility:
                     if '=' in t:
                         t_tmp = t.split("=")
                         d1[t_tmp[0]] = t_tmp[1]
+                        d1["expect"] = expect
+                        d1["id"] = data_id
                 d['data'] = d1
             if method_col is not None:
                 d["method"] = contents.cell(i, method_col).value
