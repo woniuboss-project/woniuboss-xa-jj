@@ -42,6 +42,9 @@ class Utility:
         url_col = None
         if 'url_col' in conf_data.keys():
             url_col = conf_data['url_col']
+        code_col = None
+        if 'code_col' in conf_data.keys():
+            code_col = conf_data['code_col']
         method_col = None
         if 'method_col' in conf_data.keys():
             method_col = conf_data['method_col']
@@ -84,9 +87,14 @@ class Utility:
                     if '=' in t:
                         t_tmp = t.split("=")
                         d1[t_tmp[0]] = t_tmp[1]
-                        d1["expect"] = expect
-                        d1["id"] = data_id
+
                 d['data'] = d1
+                d["expect"] = expect
+                d["id"] = data_id
+                d["method"] = "POST"
+                d["code"] = "200"
+            if code_col is not None:
+                d["code"] = contents.cell(i, code_col).value
             if method_col is not None:
                 d["method"] = contents.cell(i, method_col).value
             if upload_file_col is not None:
@@ -109,7 +117,6 @@ class Utility:
     @classmethod
     def get_excel_dict_tup_list(cls, conf_data):
         test_info = cls.get_excel(conf_data)
-        li = []
         for i in range(len(test_info)):
             test_info[i] = (test_info[i],)
 
@@ -168,12 +175,13 @@ if __name__ == '__main__':
     }
     confdata2 = {
         "data_path": "../data/woniuBoss_test_cases.xlsx",
-        "sheetname": "login",
+        "sheetname": "student",
         "start_row": 1,
         "end_row": 5,
         "test_data_col": 3,
         "except_col": 4,
         "id_col": 0,
+        "code_col": 8,
         "url_col": 5,
         "method_col": 6
     }
