@@ -15,6 +15,31 @@
       "end_row": 5,
       "test_data_col": 3,
       "except_col": 7,
+      "code_col": 8,
+      "id_col": 0,
+      "url_col": 5,
+      "method_col":6
+    },
+    "student_basic_api":{
+      "data_path": "../data/woniuBoss_test_cases.xlsx",
+      "sheetname": "student",
+      "start_row": 1,
+      "end_row": 11,
+      "test_data_col": 3,
+      "except_col": 7,
+      "code_col": 8,
+      "id_col": 0,
+      "url_col": 5,
+      "method_col":6
+    },
+   "student_decode_api":{
+      "data_path": "../data/woniuBoss_test_cases.xlsx",
+      "sheetname": "student",
+      "start_row": 12,
+      "end_row": 12,
+      "test_data_col": 3,
+      "except_col": 7,
+      "code_col": 8,
       "id_col": 0,
       "url_col": 5,
       "method_col":6
