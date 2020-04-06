@@ -32,11 +32,59 @@
       "url_col": 5,
       "method_col":6
     },
-   "student_decode_api":{
+   "student_decode_api": {
+     "data_path": "../data/woniuBoss_test_cases.xlsx",
+     "sheetname": "student",
+     "start_row": 12,
+     "end_row": 13,
+     "test_data_col": 3,
+     "except_col": 7,
+     "code_col": 8,
+     "id_col": 0,
+     "url_col": 5,
+     "method_col": 6
+   },
+     "student_often_api":{
       "data_path": "../data/woniuBoss_test_cases.xlsx",
       "sheetname": "student",
-      "start_row": 12,
-      "end_row": 12,
+      "start_row": 14,
+      "end_row": 16,
+      "test_data_col": 3,
+      "except_col": 7,
+      "code_col": 8,
+      "id_col": 0,
+      "url_col": 5,
+      "method_col":6
+    },
+  "student_morningtest_api":{
+      "data_path": "../data/woniuBoss_test_cases.xlsx",
+      "sheetname": "student",
+      "start_row": 17,
+      "end_row": 19,
+      "test_data_col": 3,
+      "except_col": 7,
+      "code_col": 8,
+      "id_col": 0,
+      "url_col": 5,
+      "method_col":6
+    },
+  "student_query_leave_api":{
+      "data_path": "../data/woniuBoss_test_cases.xlsx",
+      "sheetname": "student",
+      "start_row": 20,
+      "end_row": 24,
+      "test_data_col": 3,
+      "except_col": 7,
+      "code_col": 8,
+      "id_col": 0,
+      "url_col": 5,
+      "method_col":6
+    },
+  "student_save_leave_api":{
+      "data_path": "../data/woniuBoss_test_cases.xlsx",
+      "sheetname": "student",
+      "start_row": 25,
+      "end_row": 27,
       "test_data_col": 3,
       "except_col": 7,
       "code_col": 8,
@@ -44,6 +92,7 @@
       "url_col": 5,
       "method_col":6
     }
+
 }
 
 
