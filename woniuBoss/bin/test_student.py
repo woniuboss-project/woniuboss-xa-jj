@@ -17,6 +17,8 @@ query_leave_test_data = Utility.get_excel_dict_tup_list(test_data_json['student_
 save_leave_test_data = Utility.get_excel_dict_tup_list(test_data_json['student_save_leave_api'])
 attend_result_test_data = Utility.get_excel_dict_tup_list(test_data_json['student_attend_result_api'])
 stage_test_test_data = Utility.get_excel_dict_tup_list(test_data_json['student_stage_test_api'])
+exam_record_test_data = Utility.get_excel_dict_tup_list(test_data_json['student_exam_record_api'])
+manage_class_test_data = Utility.get_excel_dict_tup_list(test_data_json['student_manage_class_api'])
 
 
 # print(login_test_data)
@@ -165,7 +167,7 @@ class StudentTest(unittest.TestCase):
         self.assertEqual(expect, actual)
 
     @parameterized.expand(attend_result_test_data)
-    def test_07_save_leave(self, test_data):
+    def test_07_attend_result(self, test_data):
         print(test_data['data'])
         if test_data['method'] == 'GET':
             test_resp = self.student.get_request(test_data)
@@ -187,7 +189,51 @@ class StudentTest(unittest.TestCase):
         self.assertEqual(expect, actual)
 
     @parameterized.expand(stage_test_test_data)
-    def test_08_save_leave(self, test_data):
+    def test_08_stage_test(self, test_data):
+        print(test_data['data'])
+        if test_data['method'] == 'GET':
+            test_resp = self.student.get_request(test_data)
+            test_resp_code = test_resp.status_code
+            if str(test_resp_code) == '200':
+                actual_status = ''
+            else:
+                actual_status = 'fail'
+            actual = [actual_status, test_resp_code]
+            expect = [test_data['expect'], test_data['code']]
+        if test_data['method'] == 'POST':
+            test_resp = self.student.post_request(test_data)
+            test_resp_code = test_resp.status_code
+            test_resp_content = test_resp.text
+            # print(test_resp_content)
+            actual = test_resp_content
+            expect = test_data['expect']
+
+        self.assertEqual(expect, actual)
+
+    @parameterized.expand(exam_record_test_data)
+    def test_08_stage_test(self, test_data):
+        print(test_data['data'])
+        if test_data['method'] == 'GET':
+            test_resp = self.student.get_request(test_data)
+            test_resp_code = test_resp.status_code
+            if str(test_resp_code) == '200':
+                actual_status = ''
+            else:
+                actual_status = 'fail'
+            actual = [actual_status, test_resp_code]
+            expect = [test_data['expect'], test_data['code']]
+        if test_data['method'] == 'POST':
+            test_resp = self.student.post_request(test_data)
+            test_resp_code = test_resp.status_code
+            test_resp_content = test_resp.text
+            # print(test_resp_content)
+            actual = test_resp_content
+            expect = test_data['expect']
+
+        self.assertEqual(expect, actual)
+
+    @parameterized.expand(manage_class_test_data)
+    def test_08_stage_test(self, test_data):
         print(test_data['data'])
         if test_data['method'] == 'GET':
             test_resp = self.student.get_request(test_data)
