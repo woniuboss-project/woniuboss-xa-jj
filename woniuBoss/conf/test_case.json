@@ -1,4 +1,7 @@
 {
   "login":"woniuBoss.bin.test_login.LoginTest",
-  "login_api":"woniuBoss.bin.test_login_api.LoginTest"
+  "login_api":"woniuBoss.bin.test_login_api.LoginTest"£¬
+  "interview_api":"woniuBoss.bin.test_interview_api.InterViewTest",
+  "res_api": "woniuBoss.bin.test_res_api.ResTest",
+  "employee": "woniuBoss.bin.test_employee_api.EmployeeTest"
 }

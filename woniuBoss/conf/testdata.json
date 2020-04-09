@@ -139,7 +139,43 @@
       "id_col": 0,
       "url_col": 5,
       "method_col":6
-    }
+    },
+	 "interview_api":{
+      "data_path": "../data/woniuboss_interface.xlsx",
+      "sheetname": "interview",
+      "start_row": 1,
+      "end_row": 10,
+      "id_col": 0,
+      "test_data_col": 3,
+      "except_col": 8,
+      "url_col": 5,
+      "code_col":6,
+      "method_col": 7
+    },
+    "employee_api":{
+      "data_path": "../data/woniuboss_interface.xlsx",
+      "sheetname": "emplyee",
+      "start_row": 1,
+      "end_row": 8,
+      "id_col": 0,
+      "test_data_col": 3,
+      "except_col": 8,
+      "url_col": 5,
+      "code_col":6,
+      "method_col": 7
+   },
+    "res_api":{
+      "data_path": "../data/woniuboss_interface.xlsx",
+      "sheetname": "res",
+      "start_row": 1,
+      "end_row": 12,
+      "id_col": 0,
+      "test_data_col": 3,
+      "except_col": 8,
+      "url_col": 5,
+      "code_col":6,
+      "method_col": 7
+  }
 
 }
 

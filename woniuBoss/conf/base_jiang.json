@@ -1,0 +1,12 @@
+{
+  "browser":"Chrome",
+  "host":"192.168.159.130",
+  "port":"8080",
+  "aurl":"WoniuBoss2.5/log/userLogin",
+  "dbuser": "root",
+  "dbpassword": "root123",
+  "dbname": "woniuboss2.5",
+  "userName": "wncd000",
+  "userPass": "woniu123",
+  "checkcode": "0000"
+}
