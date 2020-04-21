@@ -5,7 +5,7 @@ from HTMLTestRunner import HTMLTestRunner
 
 class Driven:
     def __init__(self):
-        self.test_case_data = Utility.get_json('../conf/test_case.json')
+        self.test_case_data = Utility.get_json('../conf/test_case_api.json')
         # print(self.test_case_data)
 
     def start_test(self):

@@ -140,6 +140,19 @@
       "url_col": 5,
       "method_col":6
     },
+  "resource_basic_api":{
+    "data_path": "../data/woniuBoss_test_cases.xlsx",
+      "sheetname": "resource",
+      "start_row": 1,
+      "end_row": 6,
+      "test_data_col": 3,
+      "except_col": 7,
+      "code_col": 8,
+      "id_col": 0,
+      "url_col": 5,
+      "method_col":6
+
+  },
 	 "interview_api":{
       "data_path": "../data/woniuboss_interface.xlsx",
       "sheetname": "interview",
