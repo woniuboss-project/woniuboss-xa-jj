@@ -1,8 +1,8 @@
 {
   "browser":"Chrome",
-  "host":"192.168.114.220",
+  "host":"192.168.9.90",
   "port":"8080",
-  "aurl":"WoniuBoss2.5/log/userLogin",
+  "aurl":"WoniuBoss2.5",
   "dbuser": "root",
   "dbpassword": "sky123",
   "dbname": "woniuboss2.5",

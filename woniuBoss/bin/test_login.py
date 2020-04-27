@@ -11,7 +11,7 @@ from parameterized import parameterized
 test_conf = Utility.get_json('../conf/testdata.json')
 # 通过配置获取登陆数据
 login_info = Utility.get_excel_tup_list(test_conf["login"])
-
+print(login_info)
 
 # # 1.获取测试数据 2。 对每条数据执行
 # # 3.实际结果actual与与其结果进行对比，如果一致则测试通过
@@ -36,11 +36,11 @@ class LoginTest(unittest.TestCase):
         self.driver.refresh()
 
     @parameterized.expand(login_info)
-    def test_longin(self, uname, upass, expect, tes_id):
+    def test_longin(self, uname, upass, verifycode, expect, tes_id):
 
         login_data = {
-            "username": uname,
-            "password": upass,
+            "userName": uname,
+            "userPass": upass,
 
         }
         Login().do_login(self.driver, login_data)
