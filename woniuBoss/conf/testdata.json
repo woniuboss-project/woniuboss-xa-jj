@@ -188,6 +188,15 @@
       "url_col": 5,
       "code_col":6,
       "method_col": 7
+  },
+  "student_basic_decode_ui": {
+      "data_path": "../data/woniuBoss_test_cases.xlsx",
+      "sheetname": "student_ui",
+      "start_row": 1,
+      "end_row": 3,
+      "id_col": 0,
+      "test_data_col": 3,
+      "except_col": 4
   }
 
 }

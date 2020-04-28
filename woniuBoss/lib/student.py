@@ -18,14 +18,25 @@ class Student:
     def click_subcode_confirm(self, driver):
         driver.find_element_by_css_selector('.btn-info').click()
 
-    def do_decode(self, driver, subcode):
-        self.click_decode_btton(driver)
-        self.input_subcode(driver, subcode)
-        self.click_subcode_confirm(driver)
+    def get_decode_message(self, driver):
+        message = driver.find_element_by_css_selector('.bootbox-body').text
+        driver.find_element_by_css_selector('button[data-bb-handler="ok"]').click()
+        return message
 
-    def select_class(self, driver, select_class):
+    def do_decode(self, driver, data_dic):
+        self.click_decode_btton(driver)
+        self.input_subcode(driver, data_dic["subcode"])
+        self.click_subcode_confirm(driver)
+        from selenium.webdriver.common.by import By
+        if Service().is_element_exist(driver, By.CSS_SELECTOR, '.bootbox-body'):
+            message =self.get_decode_message(driver)
+            driver.find_element_by_css_selector('#secondPass-modal button[class="close"]').click()
+            return message
+        return None
+
+    def select_class(self, driver, data_dic):
         student_class = driver.find_element_by_css_selector('.stu-class')
-        Service().select_by_name(student_class, select_class)
+        Service().select_by_name(student_class, data_dic['select_class'])
 
     def student_table(self, driver):
         student_table_list = driver.find_elements_by_css_selector('#stuInfo_table >tbody>tr')
@@ -40,7 +51,8 @@ class Student:
         attribute_dict = {
             "class": 4,
             "field": 3,
-            "status": 11
+            "status": 11,
+            "name": 1
         }
 
         info_list = []
@@ -69,17 +81,16 @@ class Student:
     def click_search_button(self, driver):
         driver.find_element_by_css_selector('button.btn.btn-padding:nth-child(2)').click()
 
-    def search_by_name(self, driver, student_name):
-        self.input_student_name(driver, student_name)
-        self.click_search_button()
+    def search_by_name(self, driver, data_dic):
+        self.input_student_name(driver, data_dic["student_name"])
+        self.click_search_button(driver)
 
-    def search_by_studentNo(self, driver, student_No):
-        self.input_student_number(driver, student_No)
-        self.click_search_button()
-    def change_module(self,driver,module_name):
-        webdriver.Chrome().find_element_by_link_text()
-        driver.find_element_by_link_text(f'{module_name}').click()
+    def search_by_studentNo(self, driver, data_dic):
+        self.input_student_number(driver, data_dic["student_No"])
+        self.click_search_button(driver)
 
+    def change_module(self, driver, data_dic):
+        driver.find_element_by_link_text(f'{data_dic["module_name"]}').click()
 
 
 class StudentApi:
