@@ -36,7 +36,7 @@ class Student:
 
     def select_class(self, driver, data_dic):
         student_class = driver.find_element_by_css_selector('.stu-class')
-        Service().select_by_name(student_class, data_dic['select_class'])
+        Service().select_by_name(student_class, data_dic['class'])
 
     def student_table(self, driver):
         student_table_list = driver.find_elements_by_css_selector('#stuInfo_table >tbody>tr')

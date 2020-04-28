@@ -197,6 +197,15 @@
       "id_col": 0,
       "test_data_col": 3,
       "except_col": 4
+  },
+  "student_basic_search_name_ui": {
+      "data_path": "../data/woniuBoss_test_cases.xlsx",
+      "sheetname": "student_ui",
+      "start_row": 4,
+      "end_row": 5,
+      "id_col": 0,
+      "test_data_col": 3,
+      "except_col": 4
   }
 
 }

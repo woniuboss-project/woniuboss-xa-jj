@@ -10,15 +10,18 @@ from woniuBoss.lib.login import Login
 from woniuBoss.lib.student import Student
 from woniuBoss.tools.service import Service
 from woniuBoss.tools.utility import Utility
+
 test_conf = Utility.get_json('../conf/testdata.json')
 
 student_basic_decode_data = Utility.get_excel_dict_tup_list(test_conf["student_basic_decode_ui"])
+student_basic_search_name_data = Utility.get_excel_dict_tup_list(test_conf["student_basic_search_name_ui"])
 
 conf_path = '../conf/base.json'
 login_data = {
     "userName": "wncd000",
     "userPass": "woniu123",
 }
+
 
 # driver = Service.get_driver(conf_path)
 # Service().open_page(driver,conf_path)
@@ -43,6 +46,7 @@ class StudentTest(unittest.TestCase):
         conf_path = '../conf/base.json'
         cls.driver = Service.get_driver(conf_path)
         Service.open_page(cls.driver, conf_path)
+
     @classmethod
     def tearDownClass(cls) -> None:
         cls.driver.quit()
@@ -58,14 +62,14 @@ class StudentTest(unittest.TestCase):
     @parameterized.expand(student_basic_decode_data)
     def test_decode(self, student_test_data):
         message = Student().do_decode(self.driver, student_test_data)
-        student_name_list =Student().get_student_info(self.driver,'name')
+        student_name_list = Student().get_student_info(self.driver, 'name')
 
         if student_test_data['expect'] == 'success':
             code_is_encrypt = False
             if message is not None:
                 result = 'fail'
             else:
-                result ='success'
+                result = 'success'
         else:
             code_is_encrypt = True
             # 判断提示消息
@@ -76,15 +80,35 @@ class StudentTest(unittest.TestCase):
         if result == 'success':
             for student_name in student_name_list:
                 if code_is_encrypt:
-                    if not "***"  in student_name:
+                    if not "***" in student_name:
                         result = 'fail'
                         break
                 else:
-                    if "***"  in student_name:
+                    if "***" in student_name:
                         result = 'fail'
                         break
             else:
                 result = 'success'
+
+        self.assertEqual(result, 'success')
+
+    @parameterized.expand(student_basic_search_name_data)
+    def test_search_class(self, student_test_data):
+        # 解密
+        student_test_data["subcode"]='woniu123'
+        message = Student().do_decode(self.driver, student_test_data)
+        Student().select_class(self.driver,student_test_data)
+        student_class_list = Student().get_student_info(self.driver, 'class')
+
+        for student_class in student_class_list:
+            if student_test_data['class'] != student_class:
+                result = 'fail'
+                break
+        else:
+            result = 'success'
+
+        self.assertEqual(result, student_test_data["expect"])
+
 
 if __name__ == '__main__':
     unittest.main(verbosity=2)
