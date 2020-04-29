@@ -45,6 +45,7 @@ class StudentTest(unittest.TestCase):
     def setUpClass(cls) -> None:
         conf_path = '../conf/base.json'
         cls.driver = Service.get_driver(conf_path)
+        cls.driver.implicitly_wait(2)
         Service.open_page(cls.driver, conf_path)
 
     @classmethod
@@ -62,6 +63,7 @@ class StudentTest(unittest.TestCase):
     @parameterized.expand(student_basic_decode_data)
     def test_decode(self, student_test_data):
         message = Student().do_decode(self.driver, student_test_data)
+
         student_name_list = Student().get_student_info(self.driver, 'name')
 
         if student_test_data['expect'] == 'success':
