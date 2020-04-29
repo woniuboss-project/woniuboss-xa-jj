@@ -64,6 +64,7 @@ class StudentTest(unittest.TestCase):
     def test_decode(self, student_test_data):
         message = Student().do_decode(self.driver, student_test_data)
         time.sleep(0.5)
+
         student_name_list = Student().get_student_info(self.driver, 'name')
 
         if student_test_data['expect'] == 'success':
