@@ -36,7 +36,7 @@ class ResourceTest(unittest.TestCase):
             test_resp = self.resource.post_request(test_data)
             test_resp_code = test_resp.status_code
             test_resp_content = test_resp.text
-            print(test_resp_content)
+            # print(test_resp_content)
             actual = test_resp_content
             expect = test_data['expect']
 
