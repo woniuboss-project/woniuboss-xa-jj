@@ -29,7 +29,7 @@ class Student:
         self.click_subcode_confirm(driver)
         from selenium.webdriver.common.by import By
         if Service().is_element_exist(driver, By.CSS_SELECTOR, '.bootbox-body'):
-            message =self.get_decode_message(driver)
+            message = self.get_decode_message(driver)
             driver.find_element_by_css_selector('#secondPass-modal button[class="close"]').click()
             return message
         return None
@@ -37,6 +37,15 @@ class Student:
     def select_class(self, driver, data_dic):
         student_class = driver.find_element_by_css_selector('.stu-class')
         Service().select_by_name(student_class, data_dic['class'])
+
+    def select_orientation(self,driver,data_dic):
+        student_orientation = driver.find_element_by_css_selector('.stu-orientation')
+        Service().select_by_name(student_orientation, data_dic['orientation'])
+
+    def select_status(self,driver,data_dic):
+        student_status = driver.find_element_by_css_selector('.stuStatus')
+        Service().select_by_name(student_status, data_dic['status'])
+
 
     def student_table(self, driver):
         student_table_list = driver.find_elements_by_css_selector('#stuInfo_table >tbody>tr')
