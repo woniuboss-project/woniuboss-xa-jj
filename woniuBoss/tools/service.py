@@ -124,7 +124,7 @@ class Service:
     def get_session(cls, conf_path):
         import requests
         data = Utility.get_json(conf_path)
-        aurl = Utility.get_json(conf_path)["aurl"]
+        aurl = Utility.get_json(conf_path)["aurl_api"]
         host = Utility.get_json(conf_path)["host"]
         port = Utility.get_json(conf_path)["port"]
         # 构造url打开网页

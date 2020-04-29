@@ -3,6 +3,7 @@
   "host":"192.168.9.90",
   "port":"8080",
   "aurl":"WoniuBoss2.5",
+  "aurl_api":"WoniuBoss2.5/log/userLogin",
   "dbuser": "root",
   "dbpassword": "sky123",
   "dbname": "woniuboss2.5",
