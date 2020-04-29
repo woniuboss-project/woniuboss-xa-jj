@@ -30,6 +30,7 @@ class Student:
         from selenium.webdriver.common.by import By
         if Service().is_element_exist(driver, By.CSS_SELECTOR, '.bootbox-body'):
             message = self.get_decode_message(driver)
+            time.sleep(0.5)
             driver.find_element_by_css_selector('#secondPass-modal button[class="close"]').click()
             return message
         return None
