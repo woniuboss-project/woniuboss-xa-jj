@@ -54,6 +54,7 @@ class StudentTest(unittest.TestCase):
 
     def setUp(self) -> None:
         Login().do_login(self.driver, data_dic=login_data)
+        time.sleep(0.5)
         Service().open_page(self.driver, conf_path, page='student')
 
     def tearDown(self) -> None:
@@ -100,6 +101,7 @@ class StudentTest(unittest.TestCase):
         # 解密
         student_test_data["subcode"]='woniu123'
         message = Student().do_decode(self.driver, student_test_data)
+        time.sleep(0.5)
         Student().select_class(self.driver,student_test_data)
         student_class_list = Student().get_student_info(self.driver, 'class')
 

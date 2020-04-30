@@ -1,0 +1,4 @@
+{
+  "login":"woniuBoss.bin.test_login.LoginTest",
+  "student": "woniuBoss.bin.test_student_ui.StudentTest"
+}
